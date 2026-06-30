@@ -6,6 +6,7 @@ load_dotenv()
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.routes import match
 from app.api.auth import verify_api_key
 from app.core.limiter import limiter
@@ -30,6 +31,15 @@ app = FastAPI(
     description="Match CVs to Job Descriptions using Groq and Llama 3.1 8B",
     version="1.0.0",
     lifespan=lifespan
+)
+
+# Configure CORS so frontend applications can make requests to this API
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins (change this to your frontend URL in production)
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 app.state.limiter = limiter
