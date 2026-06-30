@@ -1,3 +1,11 @@
+---
+title: Skill Matching Engine
+emoji: 🎯
+colorFrom: blue
+colorTo: indigo
+sdk: docker
+app_port: 7860
+---
 # AI Career Coach API
 
 A powerful FastAPI-based backend application designed to match Resumes (CVs) against Job Descriptions. It leverages **Groq** and the **Llama 3.1 8B** model to provide intelligent, AI-driven career coaching and skill matching insights.
