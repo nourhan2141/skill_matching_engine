@@ -26,7 +26,7 @@ A powerful FastAPI-based backend application designed to match Resumes (CVs) aga
 
 1. **Clone the repository** (or navigate to your project directory):
    ```bash
-   cd groq_app
+   cd skill_matching_engine
    ```
 
 2. **Create a virtual environment and install dependencies using `uv`**:
@@ -104,7 +104,7 @@ curl -H "X-API-Key: your_secure_api_key_here" http://127.0.0.1:8000/
 ## Project Structure
 
 ```text
-groq_app/
+skill_matching_engine/
 ├── .env                 # Environment variables (not tracked in git)
 ├── .venv/               # Virtual environment directory
 ├── requirements.txt     # Python dependencies
