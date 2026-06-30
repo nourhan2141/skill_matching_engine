@@ -1,0 +1,26 @@
+Nadia Hassan — AI/ML Engineer
+Cairo, Egypt | nadia.hassan@email.com
+
+SKILLS
+Languages: Python, R, SQL
+ML Libraries: Keras, Hugging Face Transformers, spaCy, NLTK, scikit-learn
+Deep Learning: neural network design, transfer learning, fine-tuning pre-trained models
+Data Tools: Pandas, NumPy, Apache Spark, Jupyter Notebooks
+Experiment Management: Weights & Biases (WandB), DVC
+Model Serving: Flask-based model APIs, containerisation with Docker
+Cloud: Google Cloud Platform (GCP), BigQuery, Cloud Storage
+Practices: natural language processing, text classification, named entity recognition
+Soft Skills: research mindset, written communication, presenting findings to stakeholders
+
+EXPERIENCE
+ML Engineer — Hive (2021–present)
+- Built text classification pipelines using fine-tuned BERT models (Hugging Face)
+- Managed model experiments using WandB and DVC for reproducibility
+- Deployed models as REST APIs using Flask + Docker
+
+Data Scientist — Synapse Analytics (2019–2021)
+- Ran NLP pipelines with spaCy for information extraction
+- Used Apache Spark for processing large-scale datasets
+
+EDUCATION
+MSc Artificial Intelligence — German University in Cairo (2019)

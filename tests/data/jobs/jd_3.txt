@@ -1,0 +1,16 @@
+Job Title: Machine Learning Engineer
+Company: Halan (Cairo, Egypt)
+
+We are looking for an ML Engineer to build and productionise our risk-scoring models.
+
+REQUIREMENTS
+- 3+ years of experience in machine learning or data science
+- Strong Python programming skills
+- Proficiency with ML frameworks: scikit-learn, XGBoost, LightGBM
+- Experience with deep learning (TensorFlow or PyTorch)
+- MLOps experience: experiment tracking (MLflow), model serving (FastAPI, TorchServe)
+- Feature engineering and working with structured/tabular data
+- SQL and data pipeline experience (Airflow, dbt)
+- Cloud deployment experience (AWS SageMaker or GCP Vertex AI)
+- Strong statistical knowledge
+- Communication skills for cross-functional work with product and data teams

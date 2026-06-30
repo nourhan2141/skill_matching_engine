@@ -1,0 +1,23 @@
+Sara Mansour — Frontend Engineer
+Alexandria, Egypt | sara.mansour@email.com
+
+SKILLS
+Languages: JavaScript, TypeScript, HTML5, CSS3
+Frameworks: React, Next.js, Vue.js, Tailwind CSS
+Testing: Jest, React Testing Library, Cypress (E2E)
+Tools: Webpack, Vite, Git, Figma, Storybook
+APIs: REST API consumption, GraphQL (client-side)
+Soft Skills: attention to detail, cross-functional collaboration, UI/UX awareness
+
+EXPERIENCE
+Frontend Engineer — Sylndr (2022–present)
+- Built reusable component library in React/TypeScript used across 6 product teams
+- Improved Lighthouse performance score from 62 to 91 through lazy loading and code splitting
+- Collaborated with designers using Figma and implemented pixel-perfect UIs
+
+Junior Frontend Developer — ITWorx (2020–2022)
+- Developed responsive web apps using Vue.js
+- Wrote unit tests with Jest, achieving 80% code coverage
+
+EDUCATION
+BSc Information Systems — Alexandria University (2020)

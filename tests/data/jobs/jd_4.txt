@@ -1,0 +1,16 @@
+Job Title: NLP / Machine Learning Engineer
+Company: Taager (Cairo, Egypt)
+
+We need an NLP Engineer to power our Arabic and English product intelligence features.
+
+REQUIREMENTS
+- Hands-on experience with large language models and transformer architectures
+- PyTorch or TensorFlow experience (not just Keras)
+- Familiarity with the Hugging Face ecosystem
+- MLOps: experiment tracking tools (MLflow or similar), model versioning
+- Experience packaging models into production APIs
+- Big data processing experience (Spark, Flink, or similar)
+- Cloud infrastructure: AWS or GCP
+- SQL proficiency
+- Strong background in NLP: sequence labelling, text classification, entity extraction
+- Ability to communicate technical results clearly to non-technical stakeholders

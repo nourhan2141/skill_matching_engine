@@ -1,0 +1,23 @@
+Omar Fathy — Embedded Systems Engineer
+Giza, Egypt | omar.fathy@email.com
+
+SKILLS
+Languages: C, C++, Assembly (ARM Cortex-M)
+Platforms: STM32, Arduino, Raspberry Pi, FreeRTOS
+Protocols: UART, SPI, I2C, CAN bus
+Tools: Keil MDK, STM32CubeIDE, Oscilloscope, Logic Analyzer, Git
+Practices: RTOS programming, interrupt handling, low-level hardware debugging
+Soft Skills: analytical thinking, precision, hardware-software integration
+
+EXPERIENCE
+Embedded Engineer — Valeo Egypt (2020–present)
+- Developed AUTOSAR-compliant firmware for automotive ECUs in C
+- Implemented CAN bus communication protocol for vehicle sensor data
+- Debugged hardware issues using oscilloscope and logic analyser
+
+Junior Embedded Developer — ITI (2019–2020)
+- Programmed STM32 microcontrollers for IoT sensor nodes
+- Worked with FreeRTOS for task scheduling
+
+EDUCATION
+BSc Electronics and Communication Engineering — Ain Shams University (2019)

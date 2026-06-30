@@ -1,0 +1,23 @@
+Youssef Adel — Junior Machine Learning Engineer
+Cairo, Egypt | youssef.adel@email.com
+
+SKILLS
+Languages: Python, SQL
+ML: scikit-learn, XGBoost, basic TensorFlow, Pandas, NumPy, Matplotlib
+Tools: Jupyter Notebook, Git, Google Colab
+Cloud: basic AWS (S3 uploads, EC2 setup from tutorials)
+Practices: supervised learning, model evaluation (accuracy, F1, AUC), EDA
+Soft Skills: fast learner, teamwork, attention to detail
+
+EXPERIENCE
+ML Intern — Robusta Technology Group (2023, 6 months)
+- Built a churn prediction model using XGBoost on a customer dataset
+- Performed EDA and feature engineering in Pandas
+- Presented findings to the data team using Matplotlib visualisations
+
+Graduation Project (2022)
+- Trained an image classifier using TensorFlow/Keras on CIFAR-10 (92% accuracy)
+- Documented the project on GitHub
+
+EDUCATION
+BSc Computer Engineering — Helwan University (2022)

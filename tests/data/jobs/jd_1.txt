@@ -1,0 +1,16 @@
+Job Title: Senior Backend Engineer
+Company: Breadfast (Cairo, Egypt)
+
+We are hiring a Senior Backend Engineer to scale our e-commerce platform.
+
+REQUIREMENTS
+- 4+ years of backend development experience
+- Proficiency in Python; Go is a strong plus
+- Experience with FastAPI or Django
+- Strong knowledge of PostgreSQL and Redis
+- Hands-on experience with Docker and Kubernetes
+- AWS cloud infrastructure experience (EC2, S3)
+- Familiarity with CI/CD tools (GitHub Actions, Jenkins)
+- Solid understanding of REST API design and microservices
+- Experience mentoring junior engineers
+- Strong communication and documentation skills

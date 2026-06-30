@@ -1,0 +1,15 @@
+Job Title: Senior Machine Learning Engineer
+Company: Nile AI (Cairo, Egypt)
+
+We are looking for a Senior ML Engineer to own our end-to-end ML platform.
+
+REQUIREMENTS
+- 5+ years of ML engineering experience in a production environment
+- Deep expertise in Python and ML frameworks (PyTorch, TensorFlow, scikit-learn)
+- MLOps: CI/CD for ML, model monitoring, drift detection (Evidently, Prometheus)
+- Distributed training and large-scale data pipelines (Spark, Kafka, Airflow)
+- Cloud: AWS (SageMaker, Lambda, Step Functions) or Azure ML
+- Experience with LLMs: fine-tuning, RAG pipelines, prompt engineering
+- Strong system design skills: designing scalable ML infrastructure
+- Experience leading ML projects and mentoring junior engineers
+- Excellent communication and stakeholder management

@@ -1,0 +1,16 @@
+Job Title: Full-Stack Engineer
+Company: Paymob (Cairo, Egypt)
+
+We are looking for a Full-Stack Engineer to build and maintain our payments platform.
+
+REQUIREMENTS
+- 3+ years of full-stack development experience
+- Strong JavaScript/TypeScript skills (React on the frontend)
+- Backend experience with Node.js and Express
+- Database experience: PostgreSQL or MySQL
+- RESTful API design and development (not just consumption)
+- Docker and basic DevOps knowledge (nice-to-have, not required)
+- GraphQL experience is a plus (client-side or server-side)
+- Familiarity with AWS or any cloud provider
+- Understanding of payment systems or fintech is a bonus
+- Strong problem-solving and communication skills

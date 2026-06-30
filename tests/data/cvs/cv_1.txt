@@ -1,0 +1,26 @@
+Ahmed Karim — Backend Software Engineer
+Cairo, Egypt | ahmed.karim@email.com
+
+SKILLS
+Programming: Python, Go, Java
+Frameworks: FastAPI, Django, Spring Boot
+Databases: PostgreSQL, Redis, MongoDB
+Infrastructure: Docker, Kubernetes, AWS (EC2, S3, RDS), Terraform
+Tools: Git, GitHub Actions, CI/CD pipelines, Linux
+Practices: REST API design, microservices architecture, unit testing, code review
+Soft Skills: team collaboration, technical documentation, mentoring junior devs
+
+EXPERIENCE
+Senior Backend Engineer — Instabug (2021–present)
+- Designed and deployed RESTful microservices in Python/FastAPI serving 2M+ daily requests
+- Reduced API latency by 40% through Redis caching and query optimisation
+- Led migration from monolithic Django app to Kubernetes-orchestrated microservices
+- Mentored 3 junior engineers and led weekly code reviews
+
+Backend Engineer — Vezeeta (2019–2021)
+- Built booking and notification services in Java/Spring Boot
+- Maintained PostgreSQL schemas and wrote complex SQL queries
+- Set up CI/CD pipelines using GitHub Actions and Docker
+
+EDUCATION
+BSc Computer Science — Cairo University (2019)
