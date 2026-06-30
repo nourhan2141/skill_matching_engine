@@ -8,7 +8,7 @@ IMPORTANT PRIVACY RULE: Disregard private personal data (like the actual name, e
 Extract the following fields:
 - "name": string (follow privacy rule)
 - "contact": object with email and phone (follow privacy rule)
-- "skills": list of strings. You MUST meticulously extract EVERY SINGLE programming language, framework, database, tool, and soft skill mentioned anywhere in the CV (e.g., Python, Django, React, PostgreSQL). Do not generalize; list each specific technology.
+- "skills": list of strings. You MUST meticulously extract EVERY SINGLE programming language, framework, database, tool, and soft skill mentioned anywhere in the CV. Do not generalize; list each specific technology. Pay special attention to short-named languages that are easy to miss, such as 'Go' (or 'Golang'), 'R', 'C', and 'C++'.
 - "experience_years": float (Calculate total years of experience by summing the durations of all roles. For roles marked "present", assume the current year is {current_year})
 - "education": list of objects (e.g., [{"degree": "BSc Computer Science", "institution": "Cairo University", "year": "2019"}])
 - "preferences": object with keys "roles" (list), "locations" (list), and "remote" (string) (e.g., {"roles": ["Backend Developer"], "locations": ["Cairo", "Remote"], "remote": "hybrid"})
