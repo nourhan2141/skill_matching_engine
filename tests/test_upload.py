@@ -84,6 +84,34 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Test the AI Career Coach matcher with a PDF CV.")
     parser.add_argument("--cv", default="tests/data/cvs/cv_1.pdf", help="Path to CV PDF file")
     parser.add_argument("--job", default="tests/data/jobs/jd_1.txt", help="Path to Job TXT file")
+    parser.add_argument("--all", action="store_true", help="Run all available test pairs sequentially")
     args = parser.parse_args()
     
-    main(args.cv, args.job)
+    if args.all:
+        print("[*] Running all test pairs...")
+        jobs_dir = "tests/data/jobs"
+        cvs_dir = "tests/data/cvs"
+        
+        if not os.path.exists(jobs_dir) or not os.path.exists(cvs_dir):
+            print("[-] Test data directories not found.")
+        else:
+            job_files = [f for f in os.listdir(jobs_dir) if f.startswith("jd_") and f.endswith(".txt")]
+            # Sort by number, assuming format jd_X.txt
+            job_files.sort(key=lambda x: int(x.split('_')[1].split('.')[0]))
+            
+            for jd_file in job_files:
+                pair_num = jd_file.split('_')[1].split('.')[0]
+                cv_file = f"cv_{pair_num}.pdf"
+                
+                jd_path = os.path.join(jobs_dir, jd_file)
+                cv_path = os.path.join(cvs_dir, cv_file)
+                
+                if os.path.exists(cv_path):
+                    print(f"\n{'#'*80}")
+                    print(f"### RUNNING PAIR {pair_num}: {cv_file} vs {jd_file}")
+                    print(f"{'#'*80}\n")
+                    main(cv_path, jd_path)
+                else:
+                    print(f"[-] Missing matching CV for {jd_file} (expected {cv_path})")
+    else:
+        main(args.cv, args.job)

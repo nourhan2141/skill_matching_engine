@@ -3,9 +3,9 @@ from pydantic import ValidationError
 from app.schemas.match import JobMatchResponse, CandidateProfile, JobMatchResult, JobProfile
 from app.services.prompts import PromptBuilder
 from app.core.llm import generate_json
-from app.services.pdf_parser import extract_text_from_pdf
+from app.services.pdf_parser import extract_cv_text_robust
 from app.services.ocr_service import extract_text_from_image
-from app.core.config import MAX_CV_SIZE_BYTES, MAX_JD_CHARS, MAX_IMAGE_SIZE_BYTES
+from app.core.config import MAX_CV_SIZE_BYTES, MAX_JD_CHARS, MAX_IMAGE_SIZE_BYTES, GROQ_EXTRACTION_MODEL
 import logging
 import asyncio
 
@@ -20,15 +20,20 @@ async def perform_match(cv_text: str, job_description: str) -> JobMatchResponse:
     2. Extract Job Description text into a structured profile.
     3. Evaluate the profiles against each other using a rubric.
     """
-    cv_prompt = PromptBuilder.build_cv_parsing_prompt(cv_text)
+    cv_base_prompt = PromptBuilder.build_cv_base_parsing_prompt(cv_text)
+    cv_skills_prompt = PromptBuilder.build_cv_skills_parsing_prompt(cv_text)
     job_prompt = PromptBuilder.build_job_parsing_prompt(job_description)
 
     try:
-        # Steps 1 & 2: Parse CV and Job Description concurrently
-        cv_json, job_json = await asyncio.gather(
-            generate_json(cv_prompt),
-            generate_json(job_prompt)
+        # Steps 1 & 2: Parse CV (base and skills separately) and Job Description concurrently
+        cv_base_json, cv_skills_json, job_json = await asyncio.gather(
+            generate_json(cv_base_prompt, model_name=GROQ_EXTRACTION_MODEL),
+            generate_json(cv_skills_prompt, model_name=GROQ_EXTRACTION_MODEL, max_tokens=8192),
+            generate_json(job_prompt, model_name=GROQ_EXTRACTION_MODEL)
         )
+        
+        # Merge the two CV parsing results
+        cv_json = {**cv_base_json, **cv_skills_json}
     except Exception:
         logging.exception("Error communicating with LLM during parsing")
         raise HTTPException(
@@ -85,7 +90,7 @@ async def perform_match(cv_text: str, job_description: str) -> JobMatchResponse:
 async def match_candidate_to_job_upload(
     request: Request,
     cv_file: UploadFile = File(..., description="Candidate CV as a PDF file"),
-    job_description: str = Form(None, description="Job description as plain text (paste directly)"),
+    job_description: str = Form(None, json_schema_extra={"format": "textarea"}, description="Job description as plain text (paste directly)"),
     job_description_image: UploadFile = File(None, description="Job description as a screenshot/image (PNG, JPEG, WEBP). Used when text is not available.")
 ):
     """
@@ -102,12 +107,13 @@ async def match_candidate_to_job_upload(
         raise HTTPException(status_code=400, detail="Only PDF files are supported for the CV.")
 
     file_bytes = await cv_file.read()
+    
     if len(file_bytes) > MAX_CV_SIZE_BYTES:
         raise HTTPException(status_code=400, detail="CV file exceeds the maximum allowed size (5MB).")
 
     try:
-        cv_text = await asyncio.to_thread(extract_text_from_pdf, file_bytes)
-    except Exception:
+        cv_text = await extract_cv_text_robust(file_bytes)
+    except Exception as e:
         logging.exception("Failed to read PDF file")
         raise HTTPException(status_code=400, detail="Failed to read PDF file. Please ensure it is a valid PDF.")
 

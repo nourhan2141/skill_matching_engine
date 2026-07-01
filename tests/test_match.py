@@ -45,8 +45,10 @@ MOCK_MATCH_JSON = {
 }
 
 async def fake_generate_json(prompt, *args, **kwargs):
-    if "parse the following CV text" in prompt:
+    if "extract the candidate's base profile" in prompt:
         return MOCK_CV_JSON
+    elif "extract every single skill" in prompt:
+        return {"skills": MOCK_CV_JSON["skills"]}
     elif "parse the following Job Description text" in prompt:
         return MOCK_JOB_JSON
     else:
@@ -55,7 +57,7 @@ async def fake_generate_json(prompt, *args, **kwargs):
 @pytest.fixture
 def mock_dependencies():
     with patch("app.api.routes.match.generate_json", new=AsyncMock(side_effect=fake_generate_json)) as mock_gen, \
-         patch("app.api.routes.match.extract_text_from_pdf", return_value="Dummy CV Text") as mock_pdf:
+         patch("app.api.routes.match.extract_cv_text_robust", return_value="Dummy CV Text") as mock_pdf:
         yield mock_gen, mock_pdf
 
 def test_missing_api_key():
@@ -115,5 +117,5 @@ def test_oversized_cv():
 def test_bracket_injection_in_cv():
     from app.services.prompts import PromptBuilder
     cv_with_brackets = "I love {curly_braces} and {current_year}"
-    prompt = PromptBuilder.build_cv_parsing_prompt(cv_with_brackets)
+    prompt = PromptBuilder.build_cv_base_parsing_prompt(cv_with_brackets)
     assert "{curly_braces}" in prompt

@@ -18,7 +18,7 @@ def _clean_keys(obj):
         return [_clean_keys(item) for item in obj]
     return obj
 
-async def generate_json(prompt: str, model_name: str = GROQ_MODEL) -> dict:
+async def generate_json(prompt: str, model_name: str = GROQ_MODEL, max_tokens: int = 4096) -> dict:
     """
     Sends the prompt to the Groq API and strictly expects a JSON object back.
     Includes retry logic with exponential backoff for 429 Rate Limit errors.
@@ -37,7 +37,7 @@ async def generate_json(prompt: str, model_name: str = GROQ_MODEL) -> dict:
                 ],
                 response_format={"type": "json_object"},
                 temperature=0.0,  # Keep temperature 0 for deterministic rubric scoring
-                max_tokens=4096
+                max_tokens=max_tokens
             )
             break
         except (groq.RateLimitError, groq.APIConnectionError, groq.APITimeoutError) as e:
@@ -51,6 +51,10 @@ async def generate_json(prompt: str, model_name: str = GROQ_MODEL) -> dict:
                 
     if response is None:
         raise RuntimeError("Failed to generate response due to unhandled errors during LLM communication.")
+        
+    if response.choices[0].finish_reason == "length":
+        logging.error(f"LLM output truncated (max_tokens={max_tokens} reached). Prompt prefix: {prompt[:100]}")
+        raise RuntimeError(f"LLM output was truncated because it hit the {max_tokens} token limit.")
     
     content = response.choices[0].message.content
     logging.debug(f"Raw LLM output (first 500 chars): {repr(content[:500])}")

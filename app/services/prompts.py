@@ -1,5 +1,5 @@
-CV_PARSING_PROMPT = """
-You are an expert technical recruiter and career coach. Your task is to parse the following CV text and extract the candidate's profile into a structured JSON format.
+CV_BASE_PARSING_PROMPT = """
+You are an expert technical recruiter and career coach. Your task is to parse the following CV text and extract the candidate's base profile into a structured JSON format.
 
 IMPORTANT PRIVACY RULE: Disregard private personal data (like the actual name, email, and phone number) to protect PII. However, you must acknowledge that they exist in the document.
 - For "name", output "[PROVIDED]" if a name exists, otherwise null.
@@ -8,7 +8,6 @@ IMPORTANT PRIVACY RULE: Disregard private personal data (like the actual name, e
 Extract the following fields:
 - "name": string (follow privacy rule)
 - "contact": object with email and phone (follow privacy rule)
-- "skills": list of strings. You MUST meticulously extract EVERY SINGLE programming language, framework, database, tool, and soft skill mentioned anywhere in the CV. Do not generalize; list each specific technology. Pay special attention to short-named languages that are easy to miss, such as 'Go' (or 'Golang'), 'R', 'C', and 'C++'.
 - "experience_years": float (Calculate total years of experience by summing the durations of all roles. For roles marked "present", assume the current year is {current_year})
 - "education": list of objects (e.g., [{"degree": "BSc Computer Science", "institution": "Cairo University", "year": "2019"}])
 - "preferences": object with keys "roles" (list), "locations" (list), and "remote" (string) (e.g., {"roles": ["Backend Developer"], "locations": ["Cairo", "Remote"], "remote": "hybrid"})
@@ -19,8 +18,28 @@ CV Text:
 Output ONLY valid JSON.
 """
 
+CV_SKILLS_PARSING_PROMPT = """
+You are an expert technical recruiter. Your ONLY task is to meticulously extract every single skill from the following CV text.
+
+Extract the following field:
+- "skills": list of strings. You MUST meticulously extract EVERY SINGLE programming language, framework, database, tool, and soft skill mentioned anywhere in the CV (e.g., Python, Django, React, PostgreSQL). Do not generalize; list each specific technology. Pay special attention to short-named languages that are easy to miss, such as 'Go' (or 'Golang'), 'R', 'C', and 'C++'.
+
+CRITICAL INSTRUCTION: You MUST scan every single section of the resume. Do NOT just look for a dedicated "Skills" section. You must extract skills mentioned in the Summary, within every Work Experience bullet point, inside Project descriptions, and Certifications. Leave no skill behind.
+
+CV Text:
+{cv_text}
+
+Output ONLY valid JSON.
+"""
+
 JOB_PARSING_PROMPT = """
 You are an expert technical recruiter. Your task is to parse the following Job Description text and extract the requirements into a structured JSON format.
+
+CRITICAL INSTRUCTIONS FOR UNFORMATTED TEXT:
+The input text may have lost its original line breaks, bullet points, and formatting (appearing as a single run-on paragraph). You MUST rely on lexical and semantic cues rather than layout to distinguish requirement tiers:
+- MANDATORY CUES: "required", "must have", "minimum", "essential", "needs", "proficient in" -> Extract to "mandatory_skills".
+- PREFERRED CUES: "nice to have", "preferred", "a plus", "bonus", "ideally", "advantage" -> Extract to "nice_to_have_skills".
+- FALLBACK RULE: If no lexical cue exists for a given skill mention (i.e. it is just listed with no qualifying language), you MUST default it to "mandatory_skills" rather than "nice_to_have_skills".
 
 Extract the following fields:
 - "title": string
@@ -29,6 +48,18 @@ Extract the following fields:
 - "experience_years_required": float (minimum years required)
 - "education_required": string
 - "logistics": object with keys "location" (string), "remote" (string), and "timezone" (string) (e.g., {"location": "Cairo", "remote": "hybrid", "timezone": "GMT+2"})
+
+FEW-SHOT EXAMPLE (Handling unformatted text):
+Input: "We are looking for a Senior Developer proficient in Python and React. 5 years of experience required. AWS is a strong plus. Must have experience with PostgreSQL."
+Output:
+{
+  "title": "Senior Developer",
+  "mandatory_skills": ["Python", "React", "PostgreSQL"],
+  "nice_to_have_skills": ["AWS"],
+  "experience_years_required": 5.0,
+  "education_required": "",
+  "logistics": {"location": "", "remote": "", "timezone": ""}
+}
 
 Job Description Text:
 {job_text}
@@ -128,11 +159,15 @@ from datetime import datetime
 
 class PromptBuilder:
     @staticmethod
-    def build_cv_parsing_prompt(cv_text: str) -> str:
+    def build_cv_base_parsing_prompt(cv_text: str) -> str:
         current_year = str(datetime.now().year)
         # Replace trusted/specific tokens first to prevent user input from overriding them
-        prompt = CV_PARSING_PROMPT.replace("{current_year}", current_year)
+        prompt = CV_BASE_PARSING_PROMPT.replace("{current_year}", current_year)
         return prompt.replace("{cv_text}", cv_text)
+
+    @staticmethod
+    def build_cv_skills_parsing_prompt(cv_text: str) -> str:
+        return CV_SKILLS_PARSING_PROMPT.replace("{cv_text}", cv_text)
 
     @staticmethod
     def build_job_parsing_prompt(job_text: str) -> str:
